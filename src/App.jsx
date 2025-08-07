@@ -1,10 +1,10 @@
 import React from "react";
 import './App.css';
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
 } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
@@ -32,12 +32,13 @@ import UserProfileSettingPage from "./pages/UserProfileSettingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import Access from "./components/clientPortal/Access";
 import ClientPortalPage from "./pages/ClientPortalPage";
+import AddNewProject from "./pages/AddNewProject";
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
-    if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
-    }
-    return children;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
 };
 
 const App = () => {
@@ -65,17 +66,18 @@ const App = () => {
 
                 {/* Client Pages */}
                 <Route path="/clients" element={<ClientsListPage />} />
-                <Route path="/clients/client-detail" element={<ClientDetailPage />} />
-                <Route path="/clients/edit-form" element={<ClientEditFormPage />} />
+                <Route path="/clients/:id" element={<ClientDetailPage />} />
+                <Route path="/clients/:id/edit-form" element={<ClientEditFormPage />} />
 
                 {/* Client Portal Pages */}
                 <Route path="/access" element={<Access/>}/>
                 <Route path="/client-portal" element={<ClientPortalPage/>}/>
 
-                {/* Dashboard */}
-                <Route path="/dashboard/admin" element={<AdminDashBoardPage />} />
-                <Route path="/dashboard/pm" element={<ProjectManagerDashboard />} />
-                <Route path="/dashboard/team" element={<MemberDashBoardPage />} />
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<AdminDashBoardPage />} />     // Admin Dashboard remove this line
+        <Route path="/dashboard/admin" element={<AdminDashBoardPage />} />
+        <Route path="/dashboard/pm" element={<ProjectManagerDashboard />} />
+        <Route path="/dashboard/team" element={<MemberDashBoardPage />} />
 
                 {/* AI Console */}
                 <Route path="/ai-console" element={<AIConsole />} />
@@ -84,12 +86,13 @@ const App = () => {
                 {/* Analytics Pages */}
                 <Route path="/analytics" element={<AnalyticsPage />} />
 
-                {/* Project Pages */}
-                <Route path="/projects" element={<Project />} />
-                <Route path="/project/:id" element={<ProjectDetail />} />
-                <Route path="/project/tasks" element={<ProjectTaskPage />} />
-                <Route path="/project/task-board" element={<TaskBoardPage />} />
-                <Route path="/project/task-details/*" element={<ProjectTaskDetailsPage />} /> 
+        {/* Project Pages */}
+        <Route path="/project" element={<Project />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/project/tasks" element={<ProjectTaskPage />} />
+        <Route path="/project/task-board" element={<TaskBoardPage />} />
+        <Route path="/project/task-details/*" element={<ProjectTaskDetailsPage />} />
+        <Route path="/project/add-new" element={<AddNewProject />} />
 
                 {/* Team Management Pages */}
                 <Route path="/team-management" element={<TeamMembersPage />} />
@@ -105,6 +108,6 @@ const App = () => {
             </Routes>
         </Router>
     );
-};
+}
 
 export default App;
